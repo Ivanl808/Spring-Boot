@@ -1,6 +1,8 @@
 package com.bezkoder.spring.jpa.postgresql.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "maestro")
@@ -27,6 +29,10 @@ public class Maestro {
     @JoinColumn(name = "id_escuela")
     private Escuela escuela;
 
+    @OneToMany(mappedBy = "maestro", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Materia> materias;
+    
     public Maestro() {
     }
 
@@ -87,6 +93,14 @@ public class Maestro {
 
     public void setEscuela(Escuela escuela) {
         this.escuela = escuela;
+    }
+    
+    public List<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
     }
 
 }

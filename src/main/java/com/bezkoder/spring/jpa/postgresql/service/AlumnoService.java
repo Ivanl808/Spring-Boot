@@ -43,7 +43,7 @@ public class AlumnoService {
             existente.setApellido(alumno.getApellido());
             existente.setEdad(alumno.getEdad());
             existente.setSemestre(alumno.getSemestre());
-            existente.setEscuela(alumno.getEscuela());
+            existente.setGrupo(alumno.getGrupo());
 
             return repository.save(existente);
         }

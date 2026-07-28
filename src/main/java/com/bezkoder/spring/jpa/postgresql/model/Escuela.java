@@ -24,18 +24,23 @@ public class Escuela {
     @Column(nullable = false)
     private String telefono;
 
+
     // Relación con Maestro (Una escuela tiene muchos maestros)
     @OneToMany(mappedBy = "escuela", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Maestro> maestros;
 
-    // Relación con Alumno (Una escuela tiene muchos alumnos)
+
+    // Relación con Grupo (Una escuela tiene muchos grupos)
     @OneToMany(mappedBy = "escuela", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Alumno> alumnos;
+    private List<Grupo> grupos;
+
+
 
     public Escuela() {
     }
+
 
     public Escuela(Long idEscuela, String nombre, String direccion, String telefono) {
         this.idEscuela = idEscuela;
@@ -43,6 +48,7 @@ public class Escuela {
         this.direccion = direccion;
         this.telefono = telefono;
     }
+
 
     public Long getIdEscuela() {
         return idEscuela;
@@ -52,6 +58,7 @@ public class Escuela {
         this.idEscuela = idEscuela;
     }
 
+
     public String getNombre() {
         return nombre;
     }
@@ -59,6 +66,7 @@ public class Escuela {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
     public String getDireccion() {
         return direccion;
@@ -68,6 +76,7 @@ public class Escuela {
         this.direccion = direccion;
     }
 
+
     public String getTelefono() {
         return telefono;
     }
@@ -75,6 +84,7 @@ public class Escuela {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
 
     public List<Maestro> getMaestros() {
         return maestros;
@@ -84,12 +94,12 @@ public class Escuela {
         this.maestros = maestros;
     }
 
-    public List<Alumno> getAlumnos() {
-        return alumnos;
+    public List<Grupo> getGrupos() {
+        return grupos;
     }
 
-    public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
 
 }

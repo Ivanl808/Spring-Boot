@@ -1,6 +1,8 @@
 package com.bezkoder.spring.jpa.postgresql.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "alumno")
@@ -23,23 +25,33 @@ public class Alumno {
     @Column(nullable = false)
     private Integer semestre;
 
+
+    // Relación con Grupo
+    // Muchos alumnos pertenecen a un grupo
     @ManyToOne
-    @JoinColumn(name = "id_escuela")
-    private Escuela escuela;
+    @JoinColumn(name = "id_grupo")
+    private Grupo grupo;
+    
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Calificacion> calificaciones;
 
     public Alumno() {
     }
 
+
     public Alumno(Long idAlumno, String nombre, String apellido,
                   Integer edad, Integer semestre,
-                  Escuela escuela) {
+                  Grupo grupo) {
+
         this.idAlumno = idAlumno;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.semestre = semestre;
-        this.escuela = escuela;
+        this.grupo = grupo;
     }
+
 
     public Long getIdAlumno() {
         return idAlumno;
@@ -49,6 +61,7 @@ public class Alumno {
         this.idAlumno = idAlumno;
     }
 
+
     public String getNombre() {
         return nombre;
     }
@@ -56,6 +69,7 @@ public class Alumno {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
     public String getApellido() {
         return apellido;
@@ -65,6 +79,7 @@ public class Alumno {
         this.apellido = apellido;
     }
 
+
     public Integer getEdad() {
         return edad;
     }
@@ -72,6 +87,7 @@ public class Alumno {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
+
 
     public Integer getSemestre() {
         return semestre;
@@ -81,12 +97,13 @@ public class Alumno {
         this.semestre = semestre;
     }
 
-    public Escuela getEscuela() {
-        return escuela;
+
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setEscuela(Escuela escuela) {
-        this.escuela = escuela;
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
 }
